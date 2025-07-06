@@ -1,0 +1,73 @@
+  <mat-card class="task-list-card">
+  <div class="task-header">
+    <button mat-raised-button color="primary" (click)="goBack()" aria-label="Wróć">
+      <mat-icon>arrow_back</mat-icon>
+      Wróć
+    </button>
+    <h2>Lista zadań</h2>
+  </div>
+
+
+  <button mat-raised-button color="primary" (click)="openAddForm()">Dodaj nowe zadanie</button>
+
+  <mat-card class="task-form-wrapper" *ngIf="showForm">
+    <app-task-form
+      [taskToEdit]="editingTask"
+      (formSubmit)="onFormSubmit($event)"
+      (formCancel)="onFormCancel()"
+    ></app-task-form>
+  </mat-card>
+
+  <form [formGroup]="filterForm" class="filters">
+    <mat-form-field appearance="outline">
+      <mat-label>Status</mat-label>
+      <mat-select formControlName="status">
+        <mat-option value="">Wszystkie</mat-option>
+        <mat-option *ngFor="let status of statuses" [value]="status">{{ status }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Priorytet</mat-label>
+      <mat-select formControlName="priority">
+        <mat-option value="">Wszystkie</mat-option>
+        <mat-option *ngFor="let priority of priorities" [value]="priority">{{ priority }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Przypisany użytkownik</mat-label>
+      <input matInput type="text" formControlName="assignedUser" placeholder="Email" />
+    </mat-form-field>
+  </form>
+
+  <div class="sorting">
+    <button mat-button (click)="setSort('priority')">
+      Sortuj po priorytecie
+      <mat-icon>{{ sortField === 'priority' ? (sortDirection === 'asc' ? 'arrow_upward' : 'arrow_downward') : '' }}</mat-icon>
+    </button>
+    <button mat-button (click)="setSort('dueDate')">
+      Sortuj po terminie
+      <mat-icon>{{ sortField === 'dueDate' ? (sortDirection === 'asc' ? 'arrow_upward' : 'arrow_downward') : '' }}</mat-icon>
+    </button>
+  </div>
+
+  <div class="task-list">
+    <mat-card *ngFor="let task of filteredTasks" class="task-item">
+      <mat-card-title>{{ task.title }}</mat-card-title>
+      <mat-card-content>
+        <p>{{ task.description }}</p>
+        <p>Priorytet: {{ task.priority }}</p>
+        <p>Status: {{ task.status }}</p>
+        <p>Termin: {{ convertToDate(task.dueDate) | date: 'yyyy-MM-dd' }}</p>
+        <p>Przypisany: {{ task.assignedUser || 'Brak' }}</p>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-button color="primary" (click)="markAsDone(task)" [disabled]="task.status === 'done'">Wykonane</button>
+        <button mat-button color="accent" (click)="openEditForm(task)">Edytuj</button>
+        <button mat-button color="warn" (click)="deleteTask(task)">Usuń</button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</mat-card>
+

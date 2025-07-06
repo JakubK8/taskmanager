@@ -1,0 +1,14 @@
+<mat-card class="dashboard-card">
+  <h2>Witaj, {{ user?.username }}</h2>
+  <p>Rola: {{ user?.role }}</p>
+
+  <div class="actions">
+    <button mat-raised-button color="primary" (click)="goToTasks()">Moje Zadania</button>
+
+    <button *ngIf="user?.role === 'admin'" mat-raised-button color="accent" (click)="goToAdmin()">
+      Panel administratora
+    </button>
+
+    <button mat-raised-button color="warn" (click)="logout()">Wyloguj się</button>
+  </div>
+</mat-card>

@@ -1,0 +1,31 @@
+.task-form-card {
+  max-width: 600px;
+  margin: auto;
+  padding: 2rem;
+  background-color: #FFF;
+  color: #3C5159;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+
+  h3 {
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+
+  .task-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+
+  .full-width {
+    width: 100%;
+  }
+}

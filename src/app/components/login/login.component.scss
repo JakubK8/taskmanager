@@ -1,0 +1,38 @@
+:host {
+  display: block;
+  background-color: #FFFF;
+  height: 100vh;
+  padding: 2rem;
+}
+
+.login-card {
+  max-width: 400px;
+  margin: auto;
+  padding: 2rem;
+  background-color: #ffcc00;
+  color: #3C5159;
+  box-shadow: 0 4px 12px rgba(60, 81, 89, 0.2);
+  border-radius: 8px;
+}
+
+mat-form-field {
+  margin-bottom: 1rem;
+}
+
+.full-width {
+  width: 100%;
+}
+
+button {
+  background-color: #4BB2F2;
+  color: white;
+
+  &:hover {
+    background-color: #80C7F2;
+  }
+}
+
+.error-message {
+  color: #f44336;
+  margin-top: 1rem;
+}
